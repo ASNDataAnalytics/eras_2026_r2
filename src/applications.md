@@ -1,5 +1,6 @@
 ---
 theme: midnight
+toc: false
 title: Nephrology Applications
 ---
 
