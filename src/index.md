@@ -52,8 +52,8 @@ const july_regression = [
   {"Year":2025,"July":360,"Matched":362}
   ];
 
-const cum_apps_year = FileAttachment("src/data/cum_apps_year.csv").csv({ typed: true });
-const reg_result = FileAttachment("src/data/reg_result.csv").csv({ typed: true });
+const cum_apps_year = FileAttachment("./data/cum_apps_year.csv").csv({ typed: true });
+const reg_result = FileAttachment("./data/reg_result.csv").csv({ typed: true });
 ```
 
 # ERAS 2026 Nephrology Fellowship Applications
