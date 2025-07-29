@@ -1,111 +1,129 @@
 ---
 toc: false
+theme: midnight
 ---
 
-<div class="hero">
-  <h1>ERAS 2026 Dashboard</h1>
-  <h2>Welcome to your new app! Edit&nbsp;<code style="font-size: 90%;">src/index.md</code> to change this page.</h2>
-  <a href="https://observablehq.com/framework/getting-started">Get started<span style="display: inline-block; margin-left: 0.25rem;">↗︎</span></a>
-</div>
-
-<div class="grid grid-cols-2" style="grid-auto-rows: 504px;">
-  <div class="card">${
-    resize((width) => Plot.plot({
-      title: "Your awesomeness over time 🚀",
-      subtitle: "Up and to the right!",
-      width,
-      y: {grid: true, label: "Awesomeness"},
-      marks: [
-        Plot.ruleY([0]),
-        Plot.lineY(aapl, {x: "Date", y: "Close", tip: true})
-      ]
-    }))
-  }</div>
-  <div class="card">${
-    resize((width) => Plot.plot({
-      title: "How big are penguins, anyway? 🐧",
-      width,
-      grid: true,
-      x: {label: "Body mass (g)"},
-      y: {label: "Flipper length (mm)"},
-      color: {legend: true},
-      marks: [
-        Plot.linearRegressionY(penguins, {x: "body_mass_g", y: "flipper_length_mm", stroke: "species"}),
-        Plot.dot(penguins, {x: "body_mass_g", y: "flipper_length_mm", stroke: "species", tip: true})
-      ]
-    }))
-  }</div>
-</div>
-
----
-
-## Next steps
-
-Here are some ideas of things you could try…
-
-<div class="grid grid-cols-4">
-  <div class="card">
-    Chart your own data using <a href="https://observablehq.com/framework/lib/plot"><code>Plot</code></a> and <a href="https://observablehq.com/framework/files"><code>FileAttachment</code></a>. Make it responsive using <a href="https://observablehq.com/framework/javascript#resize(render)"><code>resize</code></a>.
-  </div>
-  <div class="card">
-    Create a <a href="https://observablehq.com/framework/project-structure">new page</a> by adding a Markdown file (<code>whatever.md</code>) to the <code>src</code> folder.
-  </div>
-  <div class="card">
-    Add a drop-down menu using <a href="https://observablehq.com/framework/inputs/select"><code>Inputs.select</code></a> and use it to filter the data shown in a chart.
-  </div>
-  <div class="card">
-    Write a <a href="https://observablehq.com/framework/loaders">data loader</a> that queries a local database or API, generating a data snapshot on build.
-  </div>
-  <div class="card">
-    Import a <a href="https://observablehq.com/framework/imports">recommended library</a> from npm, such as <a href="https://observablehq.com/framework/lib/leaflet">Leaflet</a>, <a href="https://observablehq.com/framework/lib/dot">GraphViz</a>, <a href="https://observablehq.com/framework/lib/tex">TeX</a>, or <a href="https://observablehq.com/framework/lib/duckdb">DuckDB</a>.
-  </div>
-  <div class="card">
-    Ask for help, or share your work or ideas, on our <a href="https://github.com/observablehq/framework/discussions">GitHub discussions</a>.
-  </div>
-  <div class="card">
-    Visit <a href="https://github.com/observablehq/framework">Framework on GitHub</a> and give us a star. Or file an issue if you’ve found a bug!
-  </div>
-</div>
+<!-- 00 Styling -->
 
 <style>
 
-.hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: var(--sans-serif);
-  margin: 4rem 0 8rem;
-  text-wrap: balance;
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
 }
 
-.hero h1 {
-  margin: 1rem 0;
-  padding: 1rem 0;
-  max-width: none;
-  font-size: 14vw;
-  font-weight: 900;
-  line-height: 1;
-  background: linear-gradient(30deg, var(--theme-foreground-focus), currentColor);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.observablehq-link-active > a:nth-child(1) {
+  color: #0077c8;
 }
 
-.hero h2 {
-  margin: 0;
-  max-width: 34em;
-  font-size: 20px;
-  font-style: initial;
-  font-weight: 500;
-  line-height: 1.5;
-  color: var(--theme-foreground-muted);
+#observablehq-header {
+  background-color: #00468b;
+  border-radius: 4px;
 }
 
-@media (min-width: 640px) {
-  .hero h1 {
-    font-size: 90px;
-  }
+svg {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+
+p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
 }
 
 </style>
+
+<!-- 01 Data -->
+
+```js
+const july_regression = [
+  {"Year":2014,"July":303,"Matched":306},
+  {"Year":2015,"July":274,"Matched":254},
+  {"Year":2016,"July":236,"Matched":276},
+  {"Year":2017,"July":235,"Matched":284},
+  {"Year":2018,"July":252,"Matched":285},
+  {"Year":2019,"July":286,"Matched":291},
+  {"Year":2020,"July":273,"Matched":291},
+  {"Year":2021,"July":375,"Matched":345},
+  {"Year":2022,"July":349,"Matched":335},
+  {"Year":2023,"July":368,"Matched":359},
+  {"Year":2024,"July":313,"Matched":321},
+  {"Year":2025,"July":360,"Matched":362}
+  ];
+
+const cum_apps_year = FileAttachment("src/data/cum_apps_year.csv").csv({ typed: true });
+const reg_result = FileAttachment("src/data/reg_result.csv").csv({ typed: true });
+```
+
+# ERAS 2026 Nephrology Fellowship Applications
+
+<br>
+
+<!-- 02 Viz -->
+
+<div class="grid grid-cols-2">
+
+  <div class="card">
+    <p>Electronic Residency Application System (ERAS) data on the appointment year (AY) 2026 nephrology Match indicate:</p>
+      <ul>
+        <li style = 'padding: 10px; font-size: 16px;'>Nephrology candidates were [up/down] XX% compared with the ERAS 2025 application cycle. Applications were [flat/up/down] year over year, with average applications per candidate [dropping/rising] to XX.X.</li>
+        <li style = 'padding: 10px; font-size: 16px;'>International medical graduate candidates (IMGs) were up [up/down] XX%.</li>
+        <li style = 'padding: 10px; font-size: 16px;'>Allopathic candidates were up 14% and osteopathic candidates [up/down] XX%.</li>
+        <li style = 'padding: 10px; font-size: 16px;'>A simple least squares model predicts with a total of XXX candidates in July a potential for ~XXX matched nephrology fellows for AY 2026.</li>
+    </ul>
+
+  </div>
+
+  <div class="card">    
+  ${
+    resize((width) => Plot.plot({
+      title: "Predicted Nephrology Match Outcome for AY 2026",
+      width,
+      grid: true,
+      x: {label: "July Nephrology Candidates"},
+      y: {label: "Matched Nephrology Fellows"},
+      color: {legend: true},
+      marginBottom: 50,
+      caption: "Sources: NRMP and ERAS",
+      marginLeft: 60,
+      marks: [
+        Plot.linearRegressionY(
+          july_regression,
+          {x: "July", y: "Matched", stroke: '#ff8200'}
+        ),
+        Plot.dot(
+          july_regression,
+          {
+            x: "July", 
+            y: "Matched", 
+            tip: true, 
+            lineHeight: 1.5, 
+            title: (d) => `ERAS: ${d.Year}\nJuly Candidates: ${d.July}\nMatched: ${d.Matched}`
+          }
+        ),
+        Plot.dot(
+          [{"Year": 2026, "July": 360, "Matched": 333}], 
+          {
+            x: "July",
+            y: "Matched",
+            r: 8,
+            fill: "#00468b",
+            tip: true,
+            title: (d) => `ERAS: ${d.Year}\nJuly Candidates: ${d.July}\nPREDICTED MATCHES: ${d.Matched.toLocaleString("en-US")}`
+          })
+        ]
+      })
+    )
+  }
+
+
+  </div>
+
+
+</div>
+
+---
+
+
+

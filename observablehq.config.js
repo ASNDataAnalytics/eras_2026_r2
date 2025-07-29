@@ -17,7 +17,8 @@ export default {
   // ],
 
   // Content to add to the head of the page, e.g. for a favicon:
-  head: '<link rel="icon" href="observable.png" type="image/png" sizes="32x32">',
+  head: '<link rel="icon" href="favicon_logo.png" type="image/png" sizes="32x32">',
+  header: "<a href='https://data.asn-online.org'><img style='width: 200px; padding: 10px 5px 5px 25px;' src='asn_data_ko.png'></a>",
 
   // The path to the source root.
   root: "src",
@@ -25,7 +26,7 @@ export default {
   // Some additional configuration options and their defaults:
   // theme: "default", // try "light", "dark", "slate", etc.
   // header: "", // what to show in the header (HTML)
-  // footer: "Built with Observable.", // what to show in the footer (HTML)
+  footer: "<a href='https://data.asn-online.org'>ASN Data</a>" // what to show in the footer (HTML)
   // sidebar: true, // whether to show the sidebar
   // toc: true, // whether to show the table of contents
   // pager: true, // whether to show previous & next links in the footer
