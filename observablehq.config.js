@@ -18,7 +18,7 @@ export default {
 
   // Content to add to the head of the page, e.g. for a favicon:
   head: '<link rel="icon" href="favicon_logo.png" type="image/png" sizes="32x32">',
-  header: "<a href='https://data.asn-online.org'><img style='width: 200px; padding: 10px 5px 5px 25px;' src='asn_data_ko.png'></a>",
+  header: "<a href='https://data.asn-online.org'><img style='width: 200px; padding: 10px 5px 10px 25px;' src='asn_data_ko.png'></a>",
 
   // The path to the source root.
   root: "src",
